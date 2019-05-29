@@ -7,8 +7,8 @@ import (
 	"net/http"
 	"regexp"
 
-	"github.com/lwlwilliam/sessionDemo/session"
-	_ "github.com/lwlwilliam/sessionDemo/session/providers/memory"
+	"github.com/lwlwilliam/session/session"
+	_ "github.com/lwlwilliam/session/session/providers/memory"
 )
 
 var globalSessions *session.Manager
@@ -23,7 +23,7 @@ func login(w http.ResponseWriter, r *http.Request) {
 
 	r.ParseForm()
 	if r.Method == "GET" {
-		t, _ := template.ParseFiles("./sessionDemo/templates/login.gtpl")
+		t, _ := template.ParseFiles("./session/templates/login.gtpl")
 		w.Header().Set("Content-Type", "text/html")
 		t.Execute(w, sess.Get("username"))
 		log.Println(sess.Get("username"))

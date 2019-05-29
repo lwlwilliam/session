@@ -6,7 +6,7 @@ import (
 	"sync"
 	"time"
 
-	"github.com/lwlwilliam/sessionDemo/session"
+	"github.com/lwlwilliam/session/session"
 )
 
 var pder = &Provider{list: list.New()}
