@@ -7,14 +7,14 @@ import (
 	"net/http"
 	"regexp"
 
-	"github.com/lwlwilliam/session/session"
-	_ "github.com/lwlwilliam/session/session/providers/memory"
+	"github.com/lwlwilliam/session"
+	_ "github.com/lwlwilliam/session/providers/memory"
 )
 
 var globalSessions *session.Manager
 
 func init() {
-	globalSessions, _ = session.NewManager("memory", "gosessionid", 3600)
+	globalSessions, _ = session.NewManager("memory", "gosessionid", 30) // 可以调小一点测试 GC
 	go globalSessions.GC()
 }
 
@@ -23,7 +23,7 @@ func login(w http.ResponseWriter, r *http.Request) {
 
 	r.ParseForm()
 	if r.Method == "GET" {
-		t, _ := template.ParseFiles("./session/templates/login.gtpl")
+		t, _ := template.ParseFiles("./session/demo/templates/login.gtpl")
 		w.Header().Set("Content-Type", "text/html")
 		t.Execute(w, sess.Get("username"))
 		log.Println(sess.Get("username"))
