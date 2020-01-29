@@ -23,7 +23,12 @@ func login(w http.ResponseWriter, r *http.Request) {
 
 	r.ParseForm()
 	if r.Method == "GET" {
-		t, _ := template.ParseFiles("./session/demo/templates/login.gtpl")
+		t, err := template.ParseFiles("/demo/templates/login.gtpl")
+		if err != nil {
+			w.Write([]byte("Something wrong."))
+			log.Println(err)
+			return
+		}
 		w.Header().Set("Content-Type", "text/html")
 		t.Execute(w, sess.Get("username"))
 		log.Println(sess.Get("username"))
