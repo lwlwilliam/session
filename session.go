@@ -27,6 +27,7 @@ type Provider interface {
 	SessionGC(maxLifeTime int64)             // 根据 maxLifeTime 来删除过期的数据
 }
 
+// session 提供者
 var providers = make(map[string]Provider)
 
 // 注册 session 管理器 provider

@@ -9,6 +9,9 @@
 </head>
 <body>
 <form action="/login" method="post">
+    {{if .}}
+        <div>{{.}} has logined.</div>
+    {{end}}
     用户名：<input type="text" name="username">
     密码：<input type="password" name="password">
     <input type="submit" value="login">
